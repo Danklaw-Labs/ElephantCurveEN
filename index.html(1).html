@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>The Elephant Curve</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2f5f9;--panel:#ffffff;--ink:#141a2b;--mute:#566079;--line:#d9dfea;
+  --c1:#b97a0f;--c2:#0f8a76;--c3:#3558c8;--c4:#923a9f;
+  --d:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --s:'Source Serif 4',Georgia,'Times New Roman',serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f1320;--panel:#171c2c;--ink:#e9edf6;--mute:#a0aac0;--line:#283049;--c1:#e4a93f;--c2:#3fc7ae;--c3:#82a0f5;--c4:#cd87dc}
+}
+:root[data-theme="dark"]{--bg:#0f1320;--panel:#171c2c;--ink:#e9edf6;--mute:#a0aac0;--line:#283049;--c1:#e4a93f;--c2:#3fc7ae;--c3:#82a0f5;--c4:#cd87dc}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.125rem/1.75 var(--s)}
+main{max-width:60rem;margin:0 auto;padding:3.5rem 1.25rem 4rem}
+h1{font:800 clamp(2.8rem,10vw,5.5rem)/.95 var(--d);letter-spacing:-.035em;margin:0 0 1rem}
+.sub{max-width:36rem;font:italic 400 1.3rem/1.4 var(--s);color:var(--mute);margin:0 0 2rem}
+.note{max-width:44rem;margin:0 0 2.5rem;padding:1rem 1.25rem;border-left:4px solid var(--mute);background:var(--panel);color:var(--mute);font-style:italic;font-size:1rem;line-height:1.65}
+p{max-width:44rem;margin:0 0 1.25rem}
+figure{margin:2.75rem 0 3rem;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1rem .85rem}
+.scroll{overflow-x:auto}
+svg{display:block;min-width:36rem;width:100%;height:auto}
+svg text{font:500 14px var(--d);fill:var(--mute)}
+.curve{stroke-dasharray:1 1;stroke-dashoffset:1;animation:draw 2.4s ease-out .2s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.curve{animation:none;stroke-dashoffset:0}}
+.leg{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;margin:.6rem .25rem 0;font:600 .92rem var(--d)}
+.leg span::before{content:"";display:inline-block;width:.7rem;height:.7rem;border-radius:50%;background:var(--k);margin-right:.45rem}
+figcaption{font:.85rem/1.4 var(--d);color:var(--mute);margin:.5rem .25rem 0}
+.seg{max-width:44rem;margin:0 0 2.25rem;padding-left:1.25rem;border-left:6px solid var(--k)}
+.tag{display:inline-block;margin-bottom:.5rem;padding:.1rem .8rem;border-radius:999px;font:700 1rem var(--d);color:var(--k);background:color-mix(in srgb,var(--k) 14%,transparent)}
+.tag i{font-style:normal;opacity:.6}
+.seg p{margin:0}
+h2{max-width:44rem;font:700 clamp(1.5rem,4.5vw,2rem)/1.2 var(--d);letter-spacing:-.02em;margin:3.5rem 0 1.5rem}
+ol{list-style:none;max-width:44rem;margin:0 0 3rem;padding:0}
+ol li{margin:0 0 1.1rem;padding:.2rem 0 .2rem 1.1rem;border-left:5px solid var(--k)}
+ol li:nth-child(1){--k:var(--c1)}ol li:nth-child(2){--k:var(--c2)}ol li:nth-child(3){--k:var(--c3)}ol li:nth-child(4){--k:var(--c4)}
+ol li b{font-family:var(--d);font-weight:800}
+h3{font:700 1.1rem var(--d);margin:0 0 .6rem;padding-top:1.5rem;border-top:1px solid var(--line);max-width:44rem}
+.src{list-style:none;margin:0;padding:0;max-width:44rem;font-size:.95rem;line-height:1.5}
+.src li{margin:0 0 .6rem;overflow-wrap:anywhere}
+a{color:var(--c3)}
+a:focus-visible{outline:2px solid var(--c3);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<h1>The Elephant Curve</h1>
+<p class="sub">Global Income Distribution: From the Fall of the Berlin Wall to the Great Recession</p>
+
+<aside class="note">(Preface: Unfortunately, due to circumstances IRL and generations still failing, I must announce yet an another delay for Project Europa. So here is an another term prompt)</aside>
+
+<p>German economist Christoph Lakner and Serbian economist Branko Milanovic published the paper “Global Income Distribution: From the Fall of the Berlin Wall to the Great Recession” in 2015, a study that assembled one of the most comprehensive databases of household income surveys ever compiled for inequality research. The timeframe also incidentally sparked a major debate on the effects of globalism.</p>
+
+<p>At the time of publication, the curve resembled an elephant, with a steeply rising back, a sharp descent toward near zero, and an upswing at the end. The methodology drew on national household surveys from over 100 countries and harmonized them to 2005 purchasing power parity (PPP) dollars. The period revealed two geopolitical ruptures: the fall of communism, which opened vast new labor markets, and the Global Financial Crisis, which abruptly ended the era of high globalization. Crucially, the data represent real per-capita income growth adjusted for inflation, not nominal changes, making cross-country comparisons meaningful.</p>
+
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 720 330" role="img" aria-label="Schematic elephant curve: a steeply rising back, a sharp descent toward near zero, and an upswing at the end">
+<defs>
+<linearGradient id="g" gradientUnits="userSpaceOnUse" x1="60" x2="700" y1="0" y2="0">
+<stop offset=".3" style="stop-color:var(--c1)"/><stop offset=".5" style="stop-color:var(--c2)"/><stop offset=".78" style="stop-color:var(--c3)"/><stop offset=".95" style="stop-color:var(--c4)"/>
+</linearGradient>
+</defs>
+<rect x="60" y="20" width="260" height="260" style="fill:var(--c1)" opacity=".1"/>
+<rect x="320" y="20" width="180" height="260" style="fill:var(--c2)" opacity=".1"/>
+<rect x="500" y="20" width="140" height="260" style="fill:var(--c3)" opacity=".1"/>
+<rect x="640" y="20" width="60" height="260" style="fill:var(--c4)" opacity=".1"/>
+<path d="M60 280V20M60 280H700" style="stroke:var(--mute)" fill="none" stroke-width="1.5"/>
+<path d="M60 210C120 208 170 120 230 78C270 52 310 44 350 50C400 58 440 150 480 230C500 262 530 268 565 268C620 268 665 190 700 64L700 280L60 280Z" fill="url(#g)" opacity=".16"/>
+<path class="curve" pathLength="1" d="M60 210C120 208 170 120 230 78C270 52 310 44 350 50C400 58 440 150 480 230C500 262 530 268 565 268C620 268 665 190 700 64" fill="none" stroke="url(#g)" stroke-width="6" stroke-linecap="round"/>
+<text x="68" y="62">steeply rising back</text>
+<text x="470" y="128">sharp descent</text>
+<text x="470" y="146">toward near zero</text>
+<text x="660" y="100" text-anchor="end">upswing at the end</text>
+<text x="380" y="312" text-anchor="middle">Global income distribution, poorest to richest</text>
+<text transform="translate(18 150) rotate(-90)" text-anchor="middle">Real income growth</text>
+</svg>
+</div>
+<div class="leg">
+<span style="--k:var(--c1)">Bottom 50%</span><span style="--k:var(--c2)">Middle 40%</span><span style="--k:var(--c3)">Top 10%</span><span style="--k:var(--c4)">Top 1%</span>
+</div>
+<figcaption>Schematic illustration of the curve described above, not to scale.</figcaption>
+</figure>
+
+<section class="seg" style="--k:var(--c1)">
+<span class="tag"><i>(</i>Bottom 50%<i>)</i></span>
+<p>The study concluded that some of the poorest regions; sub-Saharan Africa and South Asia, were benefiting little from the liberal free-trade world order because their base earnings were low to begin with; many remained below $1.25/day even after two decades of growth.</p>
+</section>
+
+<section class="seg" style="--k:var(--c2)">
+<span class="tag"><i>(</i>Middle 40%<i>)</i></span>
+<p>The most celebrated winners were China, India, Thailand, Vietnam, and Indonesia, where well over 500 million people were lifted out of the extreme poverty threshold of $1.25/day. However, as Milanovic himself noted, China does most of the statistical lifting here due to its massive rural-to-urban transition.</p>
+</section>
+
+<section class="seg" style="--k:var(--c3)">
+<span class="tag"><i>(</i>Top 10%<i>)</i></span>
+<p>The massive dip, however, is found among the middle classes of high-income countries, whose incomes have stagnated or increased only minimally. The stagnation is often cited as a leading factor for the rise of populism throughout the highly developed world.</p>
+</section>
+
+<section class="seg" style="--k:var(--c4)">
+<span class="tag"><i>(</i>Top 1%<i>)</i></span>
+<p>Yet in the same highly developed parts of the world; the United States, East Asia, and Western Europe, some of the strongest growth was seen among the richest people. Since their base income was already massive, any small percentage increase translated into massive amounts of additional income. More notably, 50% of the top 1% resided in the United States.</p>
+</section>
+
+<h2>Follow-up studies have drawn four conclusions.</h2>
+<ol>
+<li><b>First,</b> globalism has barely improved the economies of the poorest countries on Earth.</li>
+<li><b>Second,</b> “middle” countries, especially China, have benefited from globalism.</li>
+<li><b>Third,</b> the middle-class populations of rich, developed countries experienced no real wage growth or only minimal growth in real terms.</li>
+<li><b>Fourth,</b> the biggest winners of all are the already wealthy, who are better able to exploit and sustain opportunities around the world to expand their already huge wealth.</li>
+</ol>
+
+<h3>Sources:</h3>
+<ul class="src">
+<li><a href="https://openknowledge.worldbank.org/entities/publication/16065899-c37d-5750-af68-e9742cec9456" target="_blank" rel="noopener noreferrer">https://openknowledge.worldbank.org/entities/publication/16065899-c37d-5750-af68-e9742cec9456</a></li>
+<li><a href="https://www.brookings.edu/articles/whats-happening-to-the-world-income-distribution-the-elephant-chart-revisited/" target="_blank" rel="noopener noreferrer">https://www.brookings.edu/articles/whats-happening-to-the-world-income-distribution-the-elephant-chart-revisited/</a></li>
+</ul>
+</main>
+</body>
+</html>
